@@ -14,4 +14,11 @@ app.MapGet("/all", async (ApplicationDbContext db) =>
     return await db.CarTable.ToListAsync();
 });
 
+app.MapPost("/add", async (CarTable data, ApplicationDbContext db) =>
+{
+    db.CarTable.Add(data);
+    await db.SaveChangesAsync();
+    return data;
+});
+
 app.Run();

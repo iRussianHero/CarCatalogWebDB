@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarCatalogWebDB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230316180623_init")]
+    [Migration("20230316192635_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -26,8 +26,11 @@ namespace CarCatalogWebDB.Migrations
 
             modelBuilder.Entity("CarCatalogWebDB.Model.CarTable", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BrandName")
                         .IsRequired()

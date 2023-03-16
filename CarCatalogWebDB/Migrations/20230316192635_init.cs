@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -14,7 +15,8 @@ namespace CarCatalogWebDB.Migrations
                 name: "CarTable",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CarName = table.Column<string>(type: "text", nullable: false),
                     BrandName = table.Column<string>(type: "text", nullable: false),
                     EngineVolume = table.Column<int>(type: "integer", nullable: false),
