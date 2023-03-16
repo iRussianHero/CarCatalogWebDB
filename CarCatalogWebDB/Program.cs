@@ -21,4 +21,29 @@ app.MapPost("/add", async (CarTable data, ApplicationDbContext db) =>
     return data;
 });
 
+app.MapPost("/delete", async (CarTable data, ApplicationDbContext db) =>
+{
+    db.CarTable.Remove(data);
+    await db.SaveChangesAsync();
+    return data;
+});
+
+app.MapPost("/update", async (CarTable data, ApplicationDbContext db) =>
+{
+    db.CarTable.Update(data);
+    await db.SaveChangesAsync();
+    return data;
+});
+
+app.MapPost("/choose", async (CarTable data, ApplicationDbContext db) =>
+{
+    List<CarTable> allCars = new List<CarTable>();
+    allCars = await db.CarTable.ToListAsync();
+    foreach (CarTable car in allCars)
+    {
+        if (car.Id == data.Id) return car;
+    }
+    return null;
+});
+
 app.Run();
